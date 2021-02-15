@@ -1,9 +1,6 @@
 from functools import reduce
 
-lista = []
-for i in range(0, 11):
-   lista.append(i)
-   print(i)
+lista = range(0, 11)
 
 total = 0
 for i in lista:
