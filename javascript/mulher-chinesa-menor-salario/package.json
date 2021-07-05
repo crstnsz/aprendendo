@@ -1,0 +1,14 @@
+{
+  "name": "mulher-chinesa-menor-salario",
+  "version": "1.0.0",
+  "description": "'Desafio Curso'",
+  "main": "mulheres-chinesas.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Cristiano Souza",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.21.1"
+  }
+}
