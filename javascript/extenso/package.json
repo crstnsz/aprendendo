@@ -1,0 +1,17 @@
+{
+  "name": "extenso",
+  "version": "1.0.0",
+  "description": "Extenso de valores",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "author": "Cristiano Souza",
+  "license": "ISC",
+  "devDependencies": {
+    "jest": "^27.0.6"
+  },
+  "dependencies": {
+    "jest-theories": "^1.5.1"
+  }
+}

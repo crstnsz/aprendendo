@@ -54,15 +54,7 @@ function extenso(valor)
         9: "novecentos",
     }
 
-    const valoresGrandes = [
-
-        { valor: 1000000000000, nome: "trilhões" },
-        { valor: 1000000000, nome: "bilhões"},
-        { valor: 1000000, nome: "milhões"},
-        { valor: 1000, nome: "mil"}
-    ]
-
-    const e = (a, b) => (!!a && !! b && b != unidades[0]) 
+   const e = (a, b) => (!!a && !! b && b != unidades[0]) 
         ? a + " e " + b
         : (!!a?a:b)
 
@@ -86,20 +78,12 @@ function extenso(valor)
         ? "cem"
         : e(centenas[centena(valor)], aplicarFuncaoNaParcial(valor % 100, extensoDez))
     
-    const seTemNomeia = (valor, nome) => valor != "" 
-        ? ""
-        : valor + " " + nome
-
-    const divideBlocos = (valor, indiceGrandesValores) => valor < 1000
-        ? extensoCentena(valor)
-        : e(seTemNomeia(separarBloco(valor, valoresGrandes[indiceGrandesValores].valor, valoresGrandes[indiceGrandesValores].valor * 1000), valoresGrandes[indiceGrandesValores].nome)
-        , divideBlocos(valor % valoresGrandes[indiceGrandesValores].valor, indiceGrandesValores + 1))
-
     const casoZero = valor => valor == 0 
         ? unidades[0]
-        : divideBlocos(valor, 0)
+        : extensoCentena(valor);
     
     return casoZero(valor)
 }
 
 module.exports = extenso
+
