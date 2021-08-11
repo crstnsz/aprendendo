@@ -1,0 +1,1 @@
+npm i --save-dev nodemon@1.14.11 -E
