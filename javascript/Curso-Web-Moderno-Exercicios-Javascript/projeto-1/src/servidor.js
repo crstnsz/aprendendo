@@ -39,4 +39,3 @@ app.delete('/produtos/:id', (req, res, next) => {
 app.listen(porta, () => {
     console.log(`Servidor escutando na porta ${porta}.`)
 })
-
