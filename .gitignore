@@ -32,7 +32,8 @@
 *.app
 
 node_modules
-bin
-obj
+
 .vs
 .vscode
+bin
+obj

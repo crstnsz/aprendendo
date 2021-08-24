@@ -1,6 +1,7 @@
 ﻿using static System.Console;
 
-WriteLine(MdcComp(4, 10));
+int acc = 0;
+WriteLine(PowerTco(2, 12512233, acc));
 
 static int MdcComp(int a, int b)
     => a == b?a:(a > b?MdcComp(a - b, b):MdcComp(b - a, a));
@@ -14,3 +15,13 @@ static int MdcExp(int a, int b)
         : Maior(b, a)
             ?MdcExp(a - b, b)
             : a;
+
+static int Power(int value, int exp)
+    => exp == 1
+        ? value
+        : value * Power(value, exp - 1);
+
+static int PowerTco(int value, int exp, int acc)
+    => exp == 0
+        ? acc
+        : PowerTco(value, exp - 1, acc * exp);
