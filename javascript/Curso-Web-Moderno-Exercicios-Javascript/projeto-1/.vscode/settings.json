@@ -1,0 +1,14 @@
+{
+    "sqltools.connections": [
+        {},
+        {
+            "previewLimit": 50,
+            "server": "localhost",
+            "port": 5432,
+            "askForPassword": true,
+            "driver": "PostgreSQL",
+            "name": "Docspider5",
+            "connectString": "Server=localhost;Port=5432;Database=DocspiderDb;User Id=postgres;Password=Docspider@5"
+        }
+    ]
+}

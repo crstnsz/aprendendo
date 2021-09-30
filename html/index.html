@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+<html lang="en">
+<header>
+    <meta charset="UTF-8">
+    <title>Exercícios HTML</title>
+</head>
+<body>
+    <header>Exercícios HTML</header>
+    <nav>
+        <a href="/anatomia-html.html">00-teste</a>
+    </nav>
+    <section id=conteudo></section>
+    <script>
+        document.querySelectorAll('a')
+        .forEach(link => {
+            link.onclick = function(e){
+                e.preventDefault()
+
+                const conteudo = document.getElementById("conteudo")
+                fetch(link.href)
+                    .then(resp => resp.text())
+                    .then(html => conteudo.innerHTML = html)
+            }
+        })
+    </script>
+</body>
+</html>

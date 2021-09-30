@@ -34,5 +34,7 @@
 node_modules
 .fake
 .ionide
-obj
+.vs
+.vscode
 bin
+obj
