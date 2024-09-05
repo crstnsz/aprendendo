@@ -1,0 +1,5 @@
+dec soma : num # num -> num;
+--- soma (x, y) <= x + y;
+
+soma (5, 3);
+
