@@ -1,0 +1,6 @@
+dec suc : num -> num;
+--- suc n <= n + 1;
+
+suc 1;
+suc 2;
+suc 22
