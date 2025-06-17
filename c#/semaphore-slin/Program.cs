@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 public class Example
 {
-    private static SemaphoreSlim semaphore = new SemaphoreSlim(1);
+    private static readonly SemaphoreSlim semaphore = new SemaphoreSlim(1, 1);
 
     public static void Main()
     {
@@ -40,6 +40,7 @@ public class Example
             });
         }
 
+        Console.WriteLine("Test Completed");
         Console.ReadLine();
     }
 }
