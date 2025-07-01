@@ -8,14 +8,14 @@ class status_type(IntEnum):
     Success = 3
     Error = 4
 
-class dia_indexing_task(Model):
+class indexing_task(Model):
     Id = fields.UUIDField(primary_key=True )
     Status = fields.IntEnumField(null=False, enum_type=status_type)
     ErrorCode = fields.IntField(null=True)
     Error = fields.TextField(null=True)
     Traceback = fields.TextField(null=True)
 
-class dia_indexing_doc(Model):
+class indexing_ref(Model):
     Id = fields.UUIDField(primary_key=True )
-    DocumentId = fields.UUIDField()
-    Task = fields.ForeignKeyField("docspider-ia.dia_indexing_task")
+    RefId = fields.UUIDField()
+    Task = fields.ForeignKeyField("indexing_task")

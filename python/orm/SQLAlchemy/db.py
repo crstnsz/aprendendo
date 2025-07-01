@@ -8,10 +8,10 @@ from database import IAIndexingTasks3
 
 
 usuario = "postgres"
-senha = "DSxIU5tFMH2XA"
+senha = ""
 host = "localhost"
 porta = "5432"
-nome_do_banco = "docspideria"
+nome_do_banco = "test"
 
 # Codificar a senha
 senha_codificada = urllib.parse.quote(senha)
@@ -28,39 +28,39 @@ session = Session()
 
 def insert_rows() -> None:
     for i in range(10000):
-        new_record = IAIndexingTasks3(Id=str(uuid.uuid4()), Status=1, ErrorCode=i, Error='Error', Traceback='nothings')
+        new_record = IndexingTasks3(Id=str(uuid.uuid4()), Status=1, ErrorCode=i, Error='Error', Traceback='nothings')
         session.add(new_record)
     session.commit()
 
 
 def insert_rows_transactional() -> None:
     for i in range(10):
-        new_record = IAIndexingTasks3(Id=str(uuid.uuid4()), Status=1, ErrorCode=i, Error='Error', Traceback='transaction 1')
+        new_record = IndexingTasks3(Id=str(uuid.uuid4()), Status=1, ErrorCode=i, Error='Error', Traceback='transaction 1')
         session.add(new_record)
 
     session.commit()
 
     for i in range(10):
-        new_record = IAIndexingTasks3(Id=str(uuid.uuid4()), Status=1, ErrorCode=i, Error='Error', Traceback='transaction 2')
+        new_record = IndexingTasks3(Id=str(uuid.uuid4()), Status=1, ErrorCode=i, Error='Error', Traceback='transaction 2')
         session.add(new_record)
 
 def select_individual_rows() -> None:
     for i in range(10000):
-        stmt = select(IAIndexingTasks3).where(IAIndexingTasks3.ErrorCode == i)
+        stmt = select(IndexingTasks3).where(IndexingTasks3.ErrorCode == i)
         result = session.execute(stmt).scalars()
         for d in result:
             print(f"{d.Id} {d.Status} {d.ErrorCode} {d.Error} {d.Traceback}")
 
 
 def select_all_rows() -> None:
-    result = session.query(IAIndexingTasks3).all()
+    result = session.query(IndexingTasks3).all()
     for d in result:
         print(f"{d.Id} {d.Status} {d.ErrorCode} {d.Error} {d.Traceback}")
 
 
 def update_rows_without_pk() -> None:
     for i in range(10000):
-        result = session.query(IAIndexingTasks3).filter_by(ErrorCode=i).first()
+        result = session.query(IndexingTasks3).filter_by(ErrorCode=i).first()
         result.Status = 3
         result.Error = 'change'
         result.Traceback = 'a lot of data'
@@ -69,7 +69,7 @@ def update_rows_without_pk() -> None:
 
 def delete_even() -> None:
     for i in range(0, 10000, 2):
-        result = session.query(IAIndexingTasks3).filter(IAIndexingTasks3.ErrorCode == i)
+        result = session.query(IndexingTasks3).filter(IndexingTasks3.ErrorCode == i)
         result.delete()
         session.commit()
 

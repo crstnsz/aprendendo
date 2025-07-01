@@ -8,17 +8,17 @@ import cProfile
 #psql_db = PostgresqlExtDatabase('my_database', user='postgres')
 
 db = PostgresqlDatabase(
-    'docspideria',
+    'test',
     host='localhost',
     port=5432,
     user='postgres',
-    password='DS#xIU5tFMH2XA')
+    password='')
 
 class BaseModel(Model):
     class Meta:
         database = db
 
-class IAIndexingTasks(BaseModel):
+class IndexingTasks(BaseModel):
     Id = UUIDField(primary_key=True )
     Status = SmallIntegerField(null=False)
     ErrorCode = SmallIntegerField(null=True)
@@ -28,26 +28,26 @@ class IAIndexingTasks(BaseModel):
 
 db.connect()
 
-db.create_tables([IAIndexingTasks])
+db.create_tables([IndexingTasks])
 
 def insert_rows() -> None:
     for i in range(10000):
-        IAIndexingTasks.create(Id=uuid.uuid4(), Status=1, ErrorCode=i, Error='Error', Traceback='nothings')
+        IndexingTasks.create(Id=uuid.uuid4(), Status=1, ErrorCode=i, Error='Error', Traceback='nothings')
 
 def select_individual_rows() -> None:
     for i in range(10000):
-        result = IAIndexingTasks.select().where(IAIndexingTasks.ErrorCode == i)
+        result = IndexingTasks.select().where(IndexingTasks.ErrorCode == i)
         for d in result:
             print(f"{d.Id} {d.Status} {d.ErrorCode} {d.Error} {d.Traceback}")
         
 def select_all_rows() -> None:
-    result = IAIndexingTasks.select()
+    result = IndexingTasks.select()
     for d in result:
         print(f"{d.Id} {d.Status} {d.ErrorCode} {d.Error} {d.Traceback}")
 
 def update_rows_without_pk() -> None:
     for i in range(10000):
-        result = IAIndexingTasks.select().where(IAIndexingTasks.ErrorCode == i).get()
+        result = IndexingTasks.select().where(IndexingTasks.ErrorCode == i).get()
         result.Status = 3
         result.Error = 'change'
         result.Traceback = 'a lot of data'
@@ -56,7 +56,7 @@ def update_rows_without_pk() -> None:
 
 def update_rows_without_pk() -> None:
     for i in range(10000):
-        result = IAIndexingTasks.select().where(IAIndexingTasks.ErrorCode == i).get()
+        result = IndexingTasks.select().where(IndexingTasks.ErrorCode == i).get()
         result.Status = 3
         result.Error = 'change'
         result.Traceback = 'a lot of data'
@@ -66,7 +66,7 @@ def update_rows_without_pk() -> None:
 
 def delete_even() -> None:
     for i in range(0, 10000, 2):
-        result = IAIndexingTasks.select().where(IAIndexingTasks.ErrorCode == i).get()
+        result = IndexingTasks.select().where(IndexingTasks.ErrorCode == i).get()
         result.delete_instance()
 
         result.save()

@@ -2,7 +2,7 @@ from tortoise import Tortoise, run_async
 from tortoise.transactions import in_transaction
 import uuid
 import cProfile
-from models import dia_indexing_task, dia_indexing_doc
+from models import indexing_task, indexing_ref
 from database import TORTOISE_ORM
 
 
@@ -13,7 +13,7 @@ async def run():
 
         task_id = uuid.uuid4()
 
-        task =  dia_indexing_task(Id=task_id, Status=1, ErrorCode=1, Error='Error', Traceback='nothings')
+        task =  indexing_task(Id=task_id, Status=1, ErrorCode=1, Error='Error', Traceback='nothings')
         await task.save(using_db=connection)
 
         doc = dia_indexing_doc(Id=uuid.uuid4(), DocumentId=uuid.uuid4(), Task=task)
@@ -29,7 +29,7 @@ async def insert_rows() -> None:
     async with in_transaction() as connection:
 
         for i in range(10000):
-            task = dia_indexing_task(Id=uuid.uuid4(), Status=1, ErrorCode=i, Error='Error', Traceback='nothings')
+            task = indexing_task(Id=uuid.uuid4(), Status=1, ErrorCode=i, Error='Error', Traceback='nothings')
             await task.save(using_db=connection)
 
     profiler.disable()
@@ -42,7 +42,7 @@ async def select_individual_rows() -> None:
      
     async with in_transaction() as connection:
         for i in range(10000):
-            result = await dia_indexing_task.filter(ErrorCode = i)
+            result = await indexing_task.filter(ErrorCode = i)
             for d in result:
                 print(f"{d.Id} {d.Status} {d.ErrorCode} {d.Error} {d.Traceback}")
     
@@ -52,7 +52,7 @@ async def select_all_rows() -> None:
     await Tortoise.init(config=TORTOISE_ORM)
      
     async with in_transaction() as connection:
-        result = await dia_indexing_task.all()
+        result = await indexing_task.all()
         for d in result:
             print(f"{d.Id} {d.Status} {d.ErrorCode} {d.Error} {d.Traceback}")
     
@@ -64,7 +64,7 @@ async def update_rows_without_pk() -> None:
      
     async with in_transaction() as connection:
         for i in range(10000):
-            result = await dia_indexing_task.get(ErrorCode = i)
+            result = await indexing_task.get(ErrorCode = i)
             result.Status = 3
             result.Error = 'change'
             result.Traceback = 'a lot of data'
@@ -79,7 +79,7 @@ async def delete_even() -> None:
      
     async with in_transaction() as connection:
         for i in range(0, 10000, 2):
-            result = await dia_indexing_task.get(ErrorCode = i)
+            result = await indexing_task.get(ErrorCode = i)
             await result.delete(using_db=connection)
 
     await Tortoise.close_connections()

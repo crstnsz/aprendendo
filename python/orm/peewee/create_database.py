@@ -1,13 +1,13 @@
 from peewee import *
 
 db = PostgresqlDatabase(
-    'docspideria',
+    'teste',
     host='localhost',
     port=5432,
     user='postgres',
-    password='DS#xIU5tFMH2XA')
+    password='')
 
-class IAIndexingTasks(Model):
+class IndexingTasks(Model):
     Id = UUIDField()
     Status = SmallIntegerField()
     ErrorCode = SmallIntegerField()
@@ -20,4 +20,4 @@ class IAIndexingTasks(Model):
 
 db.connect()
 
-#db.create_tables([IAIndexingTasks])
+#db.create_tables([IndexingTasks])
