@@ -1,0 +1,1 @@
+docker run --rm -it --name rust --mount source=/d/git/aprendendo/rust,target=/src rust bash
